@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dracma Asset Management · Fondo de Asistencia Laboral</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ═══ RESET & VARS ═══ */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0D1B2A;
+    --navy-mid: #132438;
+    --navy-light: #1B2D45;
+    --blue: #1E3A5F;
+    --cyan: #00B4D8;
+    --cyan-soft: #48CAE4;
+    --cyan-glow: rgba(0, 180, 216, 0.15);
+    --white: #FFFFFF;
+    --text: #C8D6E5;
+    --text-muted: #7B8FA3;
+    --gold: #F0C040;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ═══ BACKGROUND GRID ═══ */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      linear-gradient(rgba(0,180,216,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,180,216,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ═══ GLOW ORB ═══ */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -20%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(0,180,216,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ═══ NAV ═══ */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: rgba(13,27,42,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,180,216,0.1);
+  }
+
+  .nav__brand {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: var(--white);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .nav__contact {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cyan);
+    text-decoration: none;
+    padding: 8px 20px;
+    border: 1px solid rgba(0,180,216,0.4);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+  .nav__contact:hover {
+    background: var(--cyan);
+    color: var(--navy);
+  }
+
+  /* ═══ HERO ═══ */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 48px 60px;
+  }
+
+  .hero__container {
+    max-width: 1100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero__badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    background: rgba(0,180,216,0.1);
+    border: 1px solid rgba(0,180,216,0.2);
+    padding: 6px 16px;
+    border-radius: 4px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero__title {
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 20px;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+
+  .hero__title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cyan-soft);
+  }
+
+  .hero__sub {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 440px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  .hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    background: linear-gradient(135deg, var(--cyan), var(--cyan-soft));
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 24px rgba(0,180,216,0.3);
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+  .hero__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,180,216,0.45);
+  }
+  .hero__cta svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* ═══ HERO CARD ═══ */
+  .hero__card {
+    background: linear-gradient(160deg, var(--navy-mid), var(--navy-light));
+    border: 1px solid rgba(0,180,216,0.12);
+    border-radius: 16px;
+    padding: 40px;
+    animation: fadeUp 0.8s ease 0.2s both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero__card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan-soft), transparent);
+  }
+
+  .card__label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 28px;
+  }
+
+  .card__stat {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .card__stat:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .card__number {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+  }
+  .card__number span {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--cyan-soft);
+  }
+
+  .card__desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .card__desc strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ═══ FEATURES STRIP ═══ */
+  .features {
+    position: relative;
+    z-index: 1;
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(0,180,216,0.08);
+    border-bottom: 1px solid rgba(0,180,216,0.08);
+    padding: 56px 48px;
+  }
+
+  .features__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .features__label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 12px;
+  }
+
+  .features__title {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 40px;
+  }
+
+  .features__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .feat {
+    background: rgba(0,180,216,0.04);
+    border: 1px solid rgba(0,180,216,0.08);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.3s ease;
+  }
+  .feat:hover {
+    border-color: rgba(0,180,216,0.2);
+    background: rgba(0,180,216,0.07);
+    transform: translateY(-2px);
+  }
+
+  .feat__icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(0,180,216,0.12);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .feat__icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--cyan);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .feat__name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .feat__desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ═══ WHY DRACMA ═══ */
+  .why {
+    position: relative;
+    z-index: 1;
+    padding: 64px 48px;
+  }
+
+  .why__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .why__left {}
+
+  .why__label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 12px;
+  }
+
+  .why__title {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .why__text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .why__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .why__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .why__check {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    background: rgba(0,180,216,0.12);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .why__check svg {
+    width: 12px;
+    height: 12px;
+    stroke: var(--cyan);
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ═══ TIMELINE ═══ */
+  .timeline {
+    background: var(--navy-mid);
+    border: 1px solid rgba(0,180,216,0.1);
+    border-radius: 16px;
+    padding: 36px;
+  }
+
+  .timeline__label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 24px;
+  }
+
+  .tl-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .tl-step:last-child { margin-bottom: 0; }
+
+  .tl-step__dot-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 16px;
+  }
+
+  .tl-step__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 2px solid rgba(0,180,216,0.3);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .tl-step--active .tl-step__dot {
+    background: var(--cyan);
+    border-color: var(--cyan);
+    box-shadow: 0 0 12px rgba(0,180,216,0.5);
+    animation: pulse 2s infinite;
+  }
+  .tl-step--done .tl-step__dot {
+    background: var(--cyan);
+    border-color: var(--cyan);
+    opacity: 0.5;
+  }
+
+  .tl-step__line {
+    width: 2px;
+    flex: 1;
+    min-height: 20px;
+    background: rgba(0,180,216,0.12);
+    margin-top: 4px;
+  }
+
+  .tl-step__content {}
+
+  .tl-step__date {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .tl-step--active .tl-step__date { color: var(--cyan-soft); }
+
+  .tl-step__text {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .tl-step--active .tl-step__text {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  /* ═══ CTA BANNER ═══ */
+  .cta-banner {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, var(--blue), rgba(0,180,216,0.2));
+    border-top: 1px solid rgba(0,180,216,0.15);
+    padding: 48px;
+    text-align: center;
+  }
+
+  .cta-banner__title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .cta-banner__sub {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  .cta-banner__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn--primary {
+    background: linear-gradient(135deg, var(--cyan), var(--cyan-soft));
+    color: var(--navy);
+    box-shadow: 0 4px 20px rgba(0,180,216,0.3);
+  }
+  .btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,180,216,0.45);
+  }
+
+  .btn--outline {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .btn--outline:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+
+  .btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* ═══ FOOTER ═══ */
+  .footer {
+    position: relative;
+    z-index: 1;
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .footer__disclaimer {
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    line-height: 1.7;
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .footer__right {
+    text-align: right;
+  }
+  .footer__right a {
+    font-size: 12px;
+    color: var(--cyan-soft);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .footer__right p {
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    margin-top: 4px;
+  }
+
+  /* ═══ ANIMATIONS ═══ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 12px rgba(0,180,216,0.5); }
+    50% { box-shadow: 0 0 24px rgba(0,180,216,0.8); }
+  }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 900px) {
+    .hero { padding: 100px 24px 40px; }
+    .hero__container { grid-template-columns: 1fr; gap: 36px; }
+    .hero__title { font-size: 38px; }
+    .features { padding: 40px 24px; }
+    .features__grid { grid-template-columns: 1fr; }
+    .why { padding: 48px 24px; }
+    .why__inner { grid-template-columns: 1fr; }
+    .cta-banner { padding: 36px 24px; }
+    .nav { padding: 0 24px; }
+    .footer { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="https://dracmafondos.com" class="nav__brand">Dracma Asset Management</a>
+  <a href="#contacto" class="nav__contact">Contactar asesor</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__container">
+    <div>
+      <div class="hero__badge">Ley 27.802 · Modernización Laboral</div>
+      <h1 class="hero__title">Fondo de<br>Asistencia<br><em>Laboral</em></h1>
+      <p class="hero__sub">Un nuevo instrumento obligatorio para empleadores del sector privado. Dracma Asset Management te acompaña en la administración de tu FAL.</p>
+
+    </div>
+
+    <!-- CARD DATOS CLAVE -->
+    <div class="hero__card">
+      <div class="card__label">Datos clave del régimen</div>
+
+      <div class="card__stat">
+        <div class="card__number">2,5<span>%</span></div>
+        <div class="card__desc"><strong>PyMEs</strong> — aporte mensual s/ remuneración bruta</div>
+      </div>
+      <div class="card__stat">
+        <div class="card__number">1<span>%</span></div>
+        <div class="card__desc"><strong>Grandes empresas</strong> — aporte mensual s/ remuneración bruta</div>
+      </div>
+      <div class="card__stat">
+        <div class="card__number">Jun <span>2026</span></div>
+        <div class="card__desc">Fecha estimada de <strong>entrada en vigencia</strong></div>
+      </div>
+      <div class="card__stat">
+        <div class="card__number">24 <span>meses</span></div>
+        <div class="card__desc">Período de <strong>carencia</strong> antes del primer uso</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="features__inner">
+    <div class="features__label">Pilares normativos</div>
+    <h2 class="features__title">¿Qué establece la ley?</h2>
+    <div class="features__grid">
+      <div class="feat">
+        <div class="feat__icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="feat__name">Obligatoriedad</div>
+        <div class="feat__desc">Todo empleador del sector privado debe constituir y mantener un FAL por cada relación laboral.</div>
+      </div>
+      <div class="feat">
+        <div class="feat__icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="feat__name">Inembargabilidad</div>
+        <div class="feat__desc">Los fondos acumulados son inembargables e intangibles, protegidos por ley.</div>
+      </div>
+      <div class="feat">
+        <div class="feat__icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="feat__name">Exención impositiva</div>
+        <div class="feat__desc">Contribuciones y rendimientos exentos de Ganancias e IVA.</div>
+      </div>
+      <div class="feat">
+        <div class="feat__icon">
+          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="feat__name">Rendimientos</div>
+        <div class="feat__desc">El fondo genera rendimientos que se acumulan a favor del empleador.</div>
+      </div>
+      <div class="feat">
+        <div class="feat__icon">
+          <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+        </div>
+        <div class="feat__name">Uso exclusivo</div>
+        <div class="feat__desc">Solo para indemnizaciones por despido sin causa, mutuo acuerdo y fallecimiento del trabajador.</div>
+      </div>
+      <div class="feat">
+        <div class="feat__icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="feat__name">Suspensión posible</div>
+        <div class="feat__desc">Si el saldo acumulado alcanza los niveles reglamentarios, se pueden suspender las contribuciones.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY DRACMA + TIMELINE -->
+<section class="why">
+  <div class="why__inner">
+    <div class="why__left">
+      <div class="why__label">Tu administrador</div>
+      <h2 class="why__title">¿Por qué elegir Dracma Asset Management?</h2>
+      <p class="why__text">Sociedad Gerente de Fondos Comunes de Inversión habilitada por la CNV. Ponemos a disposición nuestra estructura y equipo profesional para gestionar tu FAL.</p>
+      <ul class="why__list">
+        <li class="why__item">
+          <div class="why__check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span><strong>Habilitación CNV</strong> — Entidad regulada y auditada</span>
+        </li>
+        <li class="why__item">
+          <div class="why__check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span><strong>Especialización PyME</strong> — Foco en empresas del interior</span>
+        </li>
+        <li class="why__item">
+          <div class="why__check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span><strong>Ecosistema completo</strong> — FCI, ALyC y asesoramiento integrado</span>
+        </li>
+        <li class="why__item">
+          <div class="why__check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span><strong>Transparencia total</strong> — Reportes periódicos y acceso online</span>
+        </li>
+        <li class="why__item">
+          <div class="why__check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span><strong>Cercanía</strong> — Equipo local con atención personalizada</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline">
+      <div class="timeline__label">Cronograma de implementación</div>
+
+      <div class="tl-step tl-step--done">
+        <div class="tl-step__dot-wrap">
+          <div class="tl-step__dot"></div>
+          <div class="tl-step__line"></div>
+        </div>
+        <div class="tl-step__content">
+          <div class="tl-step__date">Feb 2026</div>
+          <div class="tl-step__text">Sanción de la Ley 27.802</div>
+        </div>
+      </div>
+
+      <div class="tl-step tl-step--done">
+        <div class="tl-step__dot-wrap">
+          <div class="tl-step__dot"></div>
+          <div class="tl-step__line"></div>
+        </div>
+        <div class="tl-step__content">
+          <div class="tl-step__date">Mar 2026</div>
+          <div class="tl-step__text">Promulgación — Decreto 137/2026</div>
+        </div>
+      </div>
+
+      <div class="tl-step tl-step--active">
+        <div class="tl-step__dot-wrap">
+          <div class="tl-step__dot"></div>
+          <div class="tl-step__line"></div>
+        </div>
+        <div class="tl-step__content">
+          <div class="tl-step__date">Abr 2026</div>
+          <div class="tl-step__text">Reglamentación CNV — Resolución en curso</div>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-step__dot-wrap">
+          <div class="tl-step__dot"></div>
+          <div class="tl-step__line"></div>
+        </div>
+        <div class="tl-step__content">
+          <div class="tl-step__date">Jun 2026</div>
+          <div class="tl-step__text">Entrada en vigencia del FAL</div>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-step__dot-wrap">
+          <div class="tl-step__dot"></div>
+        </div>
+        <div class="tl-step__content">
+          <div class="tl-step__date">Dic 2026</div>
+          <div class="tl-step__text">Primer uso disponible (post carencia)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner" id="contacto">
+  <h2 class="cta-banner__title">Preparate para el FAL con Dracma</h2>
+  <p class="cta-banner__sub">Conocé todos los detalles del régimen y cómo podemos ayudarte.</p>
+  <div class="cta-banner__buttons">
+    <a href="https://dracmafondos.com" target="_blank" class="btn btn--primary">
+      Visitar dracmafondos.com
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__disclaimer">
+    Dracma Sociedad Gerente de Fondos Comunes de Inversión S.A.U. — Entidad habilitada por la Comisión Nacional de Valores (CNV). La información contenida en este material es de carácter informativo y no constituye una oferta ni recomendación de inversión. Los rendimientos pasados no garantizan rendimientos futuros.
+  </div>
+  <div class="footer__right">
+    <a href="https://dracmafondos.com">dracmafondos.com</a>
+    <p>© 2026 Dracma Asset Management</p>
+  </div>
+</footer>
+
+</body>
+</html>

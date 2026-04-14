@@ -737,6 +737,31 @@
     color: var(--green);
   }
 
+  /* ═══ HIGHLIGHT CALLOUT ═══ */
+  .fund-callout {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--green-soft);
+    border: 1px solid rgba(52,211,153,0.2);
+    border-radius: 10px;
+    padding: 18px 24px;
+    margin-top: 20px;
+  }
+  .fund-callout svg {
+    min-width: 24px;
+  }
+  .fund-callout__text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.5;
+  }
+  .fund-callout__text .hl {
+    color: var(--green);
+    font-weight: 800;
+  }
+
   /* ═══ CTA BANNER ═══ */
   .cta-banner {
     position: relative;
@@ -1236,6 +1261,12 @@
           </tr>
         </tbody>
       </table>
+
+      <!-- Highlight callout -->
+      <div class="fund-callout">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <span class="fund-callout__text">Desde el 2019 multiplicó por <span class="hl">2,5x</span> en dólares su capital, lo que equivale a una tasa nominal de <span class="hl">35,77% anual</span>.</span>
+      </div>
     </div>
 
     <!-- PANEL: ESTRATEGIA DOLAR -->

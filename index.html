@@ -1134,16 +1134,16 @@
 
       <div class="fund-stats">
         <div class="fund-stat fund-stat--accent">
-          <div class="fund-stat__value">214,55<span>%</span></div>
-          <div class="fund-stat__label">Retorno 2023</div>
+          <div class="fund-stat__value">14,27<span>%</span></div>
+          <div class="fund-stat__label">YTD 2026</div>
+        </div>
+        <div class="fund-stat">
+          <div class="fund-stat__value">38,9<span>%</span></div>
+          <div class="fund-stat__label">Retorno 2025</div>
         </div>
         <div class="fund-stat">
           <div class="fund-stat__value">101,39<span>%</span></div>
           <div class="fund-stat__label">Retorno 2024</div>
-        </div>
-        <div class="fund-stat">
-          <div class="fund-stat__value">10,95<span>%</span></div>
-          <div class="fund-stat__label">YTD 2026</div>
         </div>
       </div>
 
@@ -1159,9 +1159,9 @@
         <tbody>
           <tr class="row-highlight">
             <td>YTD 2026</td>
-            <td class="col-fund">10,95%</td>
-            <td class="col-muted">5,8%</td>
-            <td class="col-muted">−3,96%</td>
+            <td class="col-fund col-beat">14,27%</td>
+            <td class="col-muted">9,2%</td>
+            <td class="col-muted">−1,28%</td>
           </tr>
           <tr>
             <td>2025</td>
@@ -1291,7 +1291,7 @@
         </div>
       </div>
 
-      <!-- SVG chart approximation -->
+      <!-- SVG chart actualizado: Jun 2024 → May 2026, eje Y -1% a 15% -->
       <div style="background: rgba(0,0,0,0.2); border: 1px solid rgba(0,180,216,0.1); border-radius: 12px; padding: 28px 24px 20px; position: relative;">
         <div style="display: flex; align-items: center; gap: 24px; margin-bottom: 20px;">
           <div style="display: flex; align-items: center; gap: 6px;">
@@ -1299,52 +1299,58 @@
             <span style="font-size: 11px; color: var(--text-muted);">Estrategia Dólar</span>
           </div>
           <div style="display: flex; align-items: center; gap: 6px;">
-            <div style="width: 24px; height: 3px; background: rgba(0,180,216,0.4); border-radius: 2px;"></div>
+            <div style="width: 24px; height: 3px; background: var(--cyan-soft); border-radius: 2px;"></div>
             <span style="font-size: 11px; color: var(--text-muted);">Moderado</span>
           </div>
           <div style="display: flex; align-items: center; gap: 6px;">
-            <div style="width: 24px; height: 3px; background: rgba(0,180,216,0.18); border-radius: 2px;"></div>
+            <div style="width: 24px; height: 3px; background: rgba(160,180,200,0.5); border-radius: 2px;"></div>
             <span style="font-size: 11px; color: var(--text-muted);">Conservador</span>
           </div>
         </div>
-        <svg viewBox="0 0 700 220" style="width: 100%; height: auto; display: block;">
-          <!-- Grid lines -->
-          <line x1="0" y1="20" x2="700" y2="20" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-          <line x1="0" y1="70" x2="700" y2="70" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-          <line x1="0" y1="120" x2="700" y2="120" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-          <line x1="0" y1="170" x2="700" y2="170" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <svg viewBox="0 0 700 230" style="width: 100%; height: auto; display: block;">
+          <!-- Grid lines (eje Y: 15%, 11%, 7%, 3%, -1%) -->
+          <line x1="30" y1="20" x2="690" y2="20" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="30" y1="63" x2="690" y2="63" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="30" y1="107" x2="690" y2="107" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="30" y1="151" x2="690" y2="151" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="30" y1="195" x2="690" y2="195" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
 
           <!-- Y-axis labels -->
-          <text x="0" y="17" fill="rgba(255,255,255,0.2)" font-size="9" font-family="Montserrat">13%</text>
-          <text x="0" y="67" fill="rgba(255,255,255,0.2)" font-size="9" font-family="Montserrat">9%</text>
-          <text x="0" y="117" fill="rgba(255,255,255,0.2)" font-size="9" font-family="Montserrat">5%</text>
-          <text x="0" y="167" fill="rgba(255,255,255,0.2)" font-size="9" font-family="Montserrat">1%</text>
+          <text x="0" y="23" fill="rgba(255,255,255,0.25)" font-size="9" font-family="Montserrat">15%</text>
+          <text x="0" y="66" fill="rgba(255,255,255,0.25)" font-size="9" font-family="Montserrat">11%</text>
+          <text x="2" y="110" fill="rgba(255,255,255,0.25)" font-size="9" font-family="Montserrat">7%</text>
+          <text x="2" y="154" fill="rgba(255,255,255,0.25)" font-size="9" font-family="Montserrat">3%</text>
+          <text x="0" y="198" fill="rgba(255,255,255,0.25)" font-size="9" font-family="Montserrat">-1%</text>
 
           <!-- X-axis labels -->
-          <text x="30" y="210" fill="rgba(255,255,255,0.2)" font-size="9" font-family="Montserrat">Jun 24</text>
-          <text x="180" y="210" fill="rgba(255,255,255,0.2)" font-size="9" font-family="Montserrat">Oct 24</text>
-          <text x="330" y="210" fill="rgba(255,255,255,0.2)" font-size="9" font-family="Montserrat">Mar 25</text>
-          <text x="490" y="210" fill="rgba(255,255,255,0.2)" font-size="9" font-family="Montserrat">Sep 25</text>
-          <text x="640" y="210" fill="rgba(255,255,255,0.2)" font-size="9" font-family="Montserrat">Mar 26</text>
+          <text x="20" y="218" fill="rgba(255,255,255,0.25)" font-size="9" font-family="Montserrat">Jun 24</text>
+          <text x="155" y="218" fill="rgba(255,255,255,0.25)" font-size="9" font-family="Montserrat">Nov 24</text>
+          <text x="320" y="218" fill="rgba(255,255,255,0.25)" font-size="9" font-family="Montserrat">May 25</text>
+          <text x="485" y="218" fill="rgba(255,255,255,0.25)" font-size="9" font-family="Montserrat">Nov 25</text>
+          <text x="655" y="218" fill="rgba(255,255,255,0.25)" font-size="9" font-family="Montserrat">May 26</text>
 
-          <!-- Conservador line (bottom) -->
-          <polyline points="30,190 80,185 130,175 180,155 230,160 280,155 330,148 380,135 430,120 480,115 530,108 580,100 630,95 670,90"
-            fill="none" stroke="rgba(0,180,216,0.18)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Glow gradient under main line -->
+          <defs>
+            <linearGradient id="glowGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(0,180,216,0.20)"/>
+              <stop offset="100%" stop-color="rgba(0,180,216,0)"/>
+            </linearGradient>
+          </defs>
 
-          <!-- Moderado line (middle, close to top) -->
-          <polyline points="30,190 80,182 130,168 180,140 230,138 280,130 330,120 380,108 430,85 480,70 530,52 580,40 630,30 670,32"
-            fill="none" stroke="rgba(0,180,216,0.45)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Conservador (gris claro, línea inferior, suave y creciente) -->
+          <polyline points="30,184 50,182 70,178 90,175 110,172 130,168 150,164 170,160 190,156 210,152 230,148 250,143 270,139 290,135 310,132 330,130 350,127 370,123 390,119 410,116 430,113 450,110 470,107 490,105 510,103 530,101 550,99 570,98 590,97 610,96 630,95 650,94 670,93 690,92"
+            fill="none" stroke="rgba(160,180,200,0.55)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 
-          <!-- Estrategia Dólar line (top) -->
-          <polyline points="30,192 80,184 130,170 180,145 230,140 280,130 330,118 380,105 430,80 480,60 530,42 580,32 630,24 670,28"
-            fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Moderado (cyan suave, línea media-alta, con dip en abr 25) -->
+          <polyline points="30,186 45,182 60,176 75,170 90,160 105,150 120,144 135,140 150,138 165,135 180,131 195,128 210,127 225,124 240,121 255,119 270,117 285,116 300,118 315,121 325,128 335,140 345,158 355,148 365,135 380,128 395,122 410,116 425,108 440,102 455,96 470,90 485,86 500,82 515,76 530,70 545,65 560,60 575,55 590,52 605,49 620,46 635,44 650,46 665,50 680,55 690,52"
+            fill="none" stroke="var(--cyan-soft)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <!-- Estrategia Dólar (cyan principal, línea más alta, con bandazos al final) -->
+          <polyline points="30,192 45,190 60,184 75,178 90,168 105,158 120,148 135,140 150,134 165,128 180,122 195,118 210,116 225,114 240,112 255,114 270,116 285,118 300,116 315,114 330,118 345,122 355,118 365,112 380,106 395,100 410,94 425,86 440,80 455,74 470,68 485,64 500,60 515,54 530,48 545,46 560,44 575,42 590,40 605,42 615,46 625,52 635,58 645,68 655,75 665,68 675,55 685,46 690,48"
+            fill="none" stroke="var(--cyan)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
 
           <!-- Glow under main line -->
-          <linearGradient id="glowGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="rgba(0,180,216,0.15)"/>
-            <stop offset="100%" stop-color="rgba(0,180,216,0)"/>
-          </linearGradient>
-          <polygon points="30,192 80,184 130,170 180,145 230,140 280,130 330,118 380,105 430,80 480,60 530,42 580,32 630,24 670,28 670,195 30,195"
+          <polygon points="30,192 45,190 60,184 75,178 90,168 105,158 120,148 135,140 150,134 165,128 180,122 195,118 210,116 225,114 240,112 255,114 270,116 285,118 300,116 315,114 330,118 345,122 355,118 365,112 380,106 395,100 410,94 425,86 440,80 455,74 470,68 485,64 500,60 515,54 530,48 545,46 560,44 575,42 590,40 605,42 615,46 625,52 635,58 645,68 655,75 665,68 675,55 685,46 690,48 690,195 30,195"
             fill="url(#glowGrad)"/>
         </svg>
       </div>
